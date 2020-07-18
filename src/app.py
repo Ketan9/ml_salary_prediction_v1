@@ -6,7 +6,7 @@ import pickle
 #create flask app object
 app = Flask(__name__) 
 
-model = pickle.load(open('src/model.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 
 #this will be my home page
 @app.route('/')    

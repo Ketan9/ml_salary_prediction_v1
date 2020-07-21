@@ -1,0 +1,61 @@
+first of all clone the git repository 
+>> git clone https://github.com/Ketan9/ml_salary_prediction_v1.git
+
+go into the folder. and follow with me.
+
+Go to the folder and open powershell from there
+
+1. create the virtual environment
+$ pip install virtualenv
+OR
+$ virtualenv <myvenv_name>
+
+2. activate virtual environment
+Run this in powershell >>  .\myvenv\Scripts\activate.ps1
+
+3. create requirements.txt file
+$ pip freeze > requirements.txt
+
+4. Edit the requirements.txt file and add all the required package for your project and run below command next to install the packages.
+$ pip install -r .\requirements.txt
+
+5. create src dirrectory and go to src directory
+$ mkdir src
+$ cd src
+
+Add model.pkl, app.py
+Optional: Add model.py, hiring.csv,
+
+6. create tests dirrectory and go to src directory: create a new python file to writing a unit test to see if index function is working properly or not.
+$ mkdir tests
+$ cd tests
+
+>>go to main folder
+run 
+$ pytest
+--this will throw an error, because "test" package does not know what is "app"
+
+--I have removed the pytest from the github actions workflow as I am getting errors with the paths. I will look into this later
+
+Once the CI part is working, we use heroku for deployment.
+download/install heroku CLI
+
+login to heroku using CLI
+$  heroku login
+this will open browser...enter your username and password to generate heroku CLI session
+
+create an application on heroku
+heroku create 
+OR
+heroku apps:create smart-panda
+
+git push heroku master
+it can push my flask code to heroku's remote repository, which is available on their server. 
+we do not want to push the code manually on heroku, that's why we will add this in part of the workflow.
+
+Ubuntu machine on github needs to login to know the heroku server.
+we will provide API token in github, so that it can login to heroku server.
+$heroku authorizations:create
+This creates an authorization with access to Heroku account. this will create Long-lived user authorization token.
+my github repo is public so we need to add this token to github secrets. 
+

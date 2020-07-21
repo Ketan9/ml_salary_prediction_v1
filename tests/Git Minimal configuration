@@ -1,0 +1,336 @@
+Git Minimal configuration
+- username
+-user email
+
+$ git config --global user.name "Ketan"
+$ git config --global user.email "ketanbhikadiya9@gmail.com"
+
+cd C:/Python_SPark/Deploy_ML_Model/deployML_Local_Environment/
+
+
+--create a new repository
+$ git init ml_predict_salary_july_2020
+
+-- observe that we are now into "master" branch in the repository
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model
+$ cd ml_predict_salary_july_2020/
+
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model/ml_predict_salary_july_2020 (master)
+
+---there are no file and folder except ".git" default dir
+
+
+1. working directory
+2. staging area
+3. repository (.git folder)
+
+file moved from 1 to 3 thru 2.
+
+these all are local repository.
+
+4th step is rempte step(cloud) : it has its own 3 stage but people call it 4th stage.
+
+
+
+--lets add some file into git repo.
+$ git status
+On branch master
+
+No commits yet
+
+nothing to commit (create/copy files and use "git add" to track)
+-- make noepad++ default text editor for git
+$ git config --global core.editor "notepad++ -multiInst -nosession"
+
+
+--just to see if git has notepad++ its defaul text editor by opening git's own config file
+$ git config --global -e
+
+
+--open file using notepad++
+$ notepad++ README.md
+
+
+--lets check the git status
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.md
+        git.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+--add file to git staging area
+$ git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   README.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        git.txt
+
+
+--not lets commit
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model/ml_predict_salary_july_2020 (master)
+$ git commit -m "this is a commit message. this is a first commint by ketan"
+[master (root-commit) c2a910d] this is a commit message. this is a first commint by ketan
+ 1 file changed, 3 insertions(+)
+ create mode 100644 README.md
+
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model/ml_predict_salary_july_2020 (master)
+$ git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        git.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+
+--$ ls -al
+#this returns all files including hidden
+
+
+
+$ git commit -a -m "commit message"
+
+
+--update readme file
+
+1. basically open a file with notepad++   [$ notepad++ README.md]
+2. check git status
+3. add the file to git stagin area from its working area  [git add .]
+4. git status
+5. commit file to repo [$ git commit -a -m "commit message"]
+
+-- express command
+$ git commit -am  "<message>" [adding to staging area and also commiting and also adding message]
+
+--logs
+$ git log
+
+--unstage the file from staging area. if we made some worng change to the file and do not want to stage, and also commit in future.
+$ git reset HEAD <filename>
+--now file is removedfrom stage, but changes into the file is still there.
+example
+$ git reset HEAD git.txt
+Unstaged changes after reset:
+M       git.txt
+
+
+--use below command and all changes will be gone from the file
+git checkout -- <filename>
+example:
+$ git checkout -- git.txt
+
+
+git help log
+git log
+
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model/ml_predict_salary_july_2020 (master)
+$ git config --global --list
+user.name=Ketan
+user.email=ketanbhikadiya9@gmail.com
+core.editor=notepad++ -multiInst -nosession
+
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model/ml_predict_salary_july_2020 (master)
+$ git config --global alias.hist "log --oneline --graph --graph --decorate --all"
+
+Ketan.Bhikadiya@91ISDL035219 MINGW64 /c/Python_SPark/Deploy_ML_Model/ml_predict_salary_july_2020 (master)
+$ git config --global --list
+user.name=Ketan
+user.email=ketanbhikadiya9@gmail.com
+core.editor=notepad++ -multiInst -nosession
+alias.hist=log --oneline --graph --graph --decorate --all
+
+#we just created "git hist" command
+
+
+
+--we can rename files
+--we can delete the files
+--we can exclude the unwanted file, in commit
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+--github
+------------------------------------------------------------------------------
+SSH
+git@github.com:Ketan9/demo.git
+
+-- recommend every repository include a README, LICENSE, and .gitignore. 
+
+
+…or create a new repository on the command line
+echo "# demo" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/Ketan9/demo.git
+git push -u origin master
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/Ketan9/demo.git
+git push -u origin master
+
+-----linking to our github repository
+git remote
+this commands manages all the remote connectionfrom from local repo
+
+$ git remote -v
+to see if we have any remote repo\
+
+
+$ git remote add origin https://github.com/Ketan9/ml_predict_salary_july_2020.git
+adding remote repo
+
+
+$ git remote -v
+origin  https://github.com/Ketan9/ml_predict_salary_july_2020.git (fetch)
+origin  https://github.com/Ketan9/ml_predict_salary_july_2020.git (push)
+--why entries twice
+--because one for fetching, one for pulling
+--99% of the time urls are same for both. sometime different
+
+
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+--pushing changes to github [it will ask for username and password]
+
+$ git push -u origin master --tags
+Enumerating objects: 22, done.
+Counting objects: 100% (22/22), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (21/21), done.
+Writing objects: 100% (22/22), 3.05 KiB | 390.00 KiB/s, done.
+Total 22 (delta 5), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (5/5), done.
+To https://github.com/Ketan9/ml_predict_salary_july_2020.git
+ * [new branch]      master -> master
+Branch 'master' set up to track remote branch 'master' from 'origin'.
+
+
+
+------------------------------------------------------------------
+------------------------------------------------------------------
+--setup ssh authentication method [saves lot of time in future]
+
+1. create ssh key in local system [user's home ditrectory]
+$ cd C:/Users/ketan.bhikadiya/
+$ pwd
+/c/Users/ketan.bhikadiya
+
+$ mkdir .ssh
+$ cd .ssh/
+
+
+2. generate the public and private key [ssh] [note: I am not using any passphrase for keygen]
+
+$ pwd
+/c/Users/ketan.bhikadiya/.ssh
+
+Ketan.Bhikadiya@91ISDL035219 MINGW64 ~/.ssh
+$ ssh-keygen -t rsa -C "ketanbhikadiya9@gmail.com"
+Generating public/private rsa key pair.
+Enter file in which to save the key (/c/Users/ketan.bhikadiya/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /c/Users/ketan.bhikadiya/.ssh/id_rsa
+Your public key has been saved in /c/Users/ketan.bhikadiya/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:FjxlMHv36hLIykF9Nt1jUSWN7T3DwhOZSuqRDJMbqjM ketanbhikadiya9@gmail.com
+The key's randomart image is:
++---[RSA 3072]----+
+|        +.o   +=+|
+|       * = . +o.o|
+|      ..@ =.+.oo.|
+|     ....O+o.=++o|
+|    .. .S+.. .+.o|
+|   E  ..o..  .   |
+|    o. o   ..    |
+|      o   ..     |
+|           ..    |
++----[SHA256]-----+
+
+
+
+$ ls -al
+total 45
+drwxr-xr-x 1 Ketan.Bhikadiya 1049089    0 Jul 16 04:40 ./
+drwxr-xr-x 1 Ketan.Bhikadiya 1049089    0 Jul 16 04:37 ../
+-rw-r--r-- 1 Ketan.Bhikadiya 1049089 2610 Jul 16 04:40 id_rsa               #private
+-rw-r--r-- 1 Ketan.Bhikadiya 1049089  579 Jul 16 04:40 id_rsa.pub           #public key
+
+
+
+--take the public key and paste in github SSH settings
+
+--to check if this is working.
+--go to git terminal
+$ ssh -T git@github.com
+The authenticity of host 'github.com (140.82.113.4)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'github.com,140.82.113.4' (RSA) to the list of known hosts.
+Hi Ketan9! You've successfully authenticated, but GitHub does not provide shell access.
+
+
+--basically to push (from local)to github
+command :  $ git push origin master
+-- but in new version of git.
+
+$ git push
+Everything up-to-date
+
+
+
+
+
+---------------------------------------------
+Python application
+
+By GitHub Actions
+
+Create and test a Python application.
+Python application logo
+python -m pip install --upgrade pip
+pip install flake8 pytest
+if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+
+    - name: Test with pytest
+      run: |
+        pip install pytest
+        pytest
+
+
+
+--once the CI process is done...build process is done.
+
+generate the Heroku token. on CLI
+(base) C:\WINDOWS\system32>heroku login
+heroku: Press any key to open up the browser to login or q to exit:
+Opening browser to https://cli-auth.heroku.com/auth/cli/browser/7a4b67ac-025e-4d2a-9ed0-53d0eb161a2a
+Logging in... done
+Logged in as ketanbhikadiya9@gmail.com
+
+(base) C:\WINDOWS\system32>heroku authorizations:create
+Creating OAuth Authorization... done
+Client:      <none>
+ID:          1a054ee7-5ba7-49e1-802c-6780afeb8985
+Description: Long-lived user authorization
+Scope:       global
+Token:       bda67e32-5696-4e83-8a89-16638e1ef5fe
+Updated at:  Fri Jul 17 2020 04:47:57 GMT-0600 (Mountain Daylight Time) (less than a minute ago)
+

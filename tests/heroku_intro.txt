@@ -5,7 +5,7 @@ Codes:
 
 Heroku
 Parent organization: Salesforce
-Heroku is a container-based cloud Platform as a Service (PaaS). Developers use Heroku to deploy, manage, and scale modern apps
+Heroku is a container-based cloud Platform as a Service (PaaS). used to  to deploy, manage, and scale modern apps
 Heroku is a cloud platform that lets companies build, deliver, monitor and scale apps — we're the fastest way to go from idea to URL, bypassing all those infrastructure headaches.
 Heroku is the quickest way for a company to become an apps company. Heroku is a service that enables companies to spend their time developing and deploying apps that immediately start producing value.
 
@@ -15,3 +15,28 @@ Heroku is the quickest way for a company to become an apps company. Heroku is a 
 
 heroku login
 heroku logs --app <app_name>
+
+
+--I have removed the pytest from the github actions workflow as I am getting errors with the paths. I will look into this later
+
+Once the CI part is working, we use heroku for deployment.
+download/install heroku CLI
+
+login to heroku using CLI
+$  heroku login
+this will open browser...enter your username and password to generate heroku CLI session
+
+create an application on heroku
+heroku create 
+OR
+heroku apps:create smart-panda
+
+git push heroku master
+it can push my flask code to heroku's remote repository, which is available on their server. 
+we do not want to push the code manually on heroku, that's why we will add this in part of the workflow.
+
+Ubuntu machine on github needs to login to know the heroku server.
+we will provide API token in github, so that it can login to heroku server.
+$heroku authorizations:create
+This creates an authorization with access to Heroku account. this will create Long-lived user authorization token.
+my github repo is public so we need to add this token to github secrets. 
